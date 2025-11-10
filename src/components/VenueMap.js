@@ -16,6 +16,14 @@ const VenueMap = () => {
             target="_blank"
             rel="noreferrer"
           >
+            <i
+              className="fa-solid fa-map-location-dot"
+              style={{
+                fontSize: "1.5rem",
+                verticalAlign: "middle",
+                transform: "translateY(-2px)",
+              }}
+            ></i>
             Open in Google Maps
           </a>
         </div>

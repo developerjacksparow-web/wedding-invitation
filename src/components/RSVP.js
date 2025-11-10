@@ -62,7 +62,21 @@ const RSVP = () => {
             />
           </div>
           <button type="submit" className="btn-open">
-            {isLoaded ? <div className="loader"></div> : "Send RSVP"}
+            {isLoaded ? (
+              <div className="loader"></div>
+            ) : (
+              <>
+                <i
+                  className="fa-brands fa-telegram"
+                  style={{
+                    fontSize: "1.5rem",
+                    verticalAlign: "middle",
+                    transform: "translateY(-2px)",
+                  }}
+                ></i>
+                Send RSVP
+              </>
+            )}
           </button>
           {submitted && (
             <div className="success-message">Thank you for your response!</div>
