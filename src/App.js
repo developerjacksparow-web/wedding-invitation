@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Welcome from "./components/Welcome";
+import WeddingDetails from "./components/WeddingDetails";
+import Countdown from "./components/Countdown";
+import VenueMap from "./components/VenueMap";
+import RSVP from "./components/RSVP";
+import Calendar from "./components/Calendar";
+import "./App.css";
+import sound from "./assests/Beloved(chosic.com).mp3";
 
 function App() {
+  const [isOpened, setIsOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [guestName] = useState("");
+
+  const handleOpen = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsOpened(true);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    if (isOpened) {
+      playAudio();
+    }
+  }, [isOpened]);
+
+  const playAudio = () => {
+    const audio = new Audio(sound);
+    audio.play();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {!isOpened && (
+        <Welcome
+          guestName={guestName}
+          onOpen={handleOpen}
+          isLoading={isLoading}
+        />
+      )}
+
+      {isOpened && (
+        <div className="main-content">
+          <WeddingDetails />
+          <Countdown />
+          <Calendar />
+          <VenueMap />
+          <RSVP />
+        </div>
+      )}
     </div>
   );
 }

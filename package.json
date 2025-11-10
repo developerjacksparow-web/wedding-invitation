@@ -1,5 +1,5 @@
 {
-  "name": "wedding-invitation",
+  "name": "sameer-wedding-card",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ajv": "^7.2.4"
   }
 }
