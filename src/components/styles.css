@@ -474,19 +474,77 @@
   100% { transform: rotate(360deg); }
 }
 
-.envelope-icon {
-  font-size: 1.1rem;
-  transition: transform 0.3s ease;
+/* Envelope open/close animation (inline in styles.css) */
+.envelope-wrapper {
+  position: relative;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  /* gentle float to attract attention */
+  animation: envelopeFloat 2.5s ease-in-out infinite;
 }
 
-.btn-open:hover .envelope-icon {
-  animation: envelopeWiggle 0.5s ease;
+.envelope-closed,
+.envelope-open {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.6rem;
+  color: inherit; /* inherit button text color */
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
 }
 
-@keyframes envelopeWiggle {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
+.envelope-closed {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0);
+}
+
+.envelope-open {
+  opacity: 0;
+  transform: translateY(6px) scale(0.9) rotate(-6deg);
+}
+
+/* Make the envelope open/close automatically so mobile users notice it (swap every 3.5s) */
+.envelope-closed {
+  animation: envelopeSwapClosed 3.5s ease-in-out infinite;
+}
+.envelope-open {
+  animation: envelopeSwapOpen 3.5s ease-in-out infinite;
+}
+
+@keyframes envelopeSwapClosed {
+  0%, 45% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+  50% { opacity: 0; transform: translateY(-10px) scale(0.95) rotate(-8deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+@keyframes envelopeSwapOpen {
+  0%, 45% { opacity: 0; transform: translateY(6px) scale(0.9) rotate(-6deg); }
+  50% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+  100% { opacity: 0; transform: translateY(6px) scale(0.9) rotate(-6deg); }
+}
+
+/* Interaction states: on hover / focus / active show open envelope */
+.btn-open:hover .envelope-closed,
+.btn-open:active .envelope-closed,
+.btn-open:focus .envelope-closed {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95) rotate(-8deg);
+}
+
+.btn-open:hover .envelope-open,
+.btn-open:active .envelope-open,
+.btn-open:focus .envelope-open {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0);
+}
+
+@keyframes envelopeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 /* Welcome Overlay */

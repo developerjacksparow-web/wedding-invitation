@@ -43,7 +43,10 @@ const Welcome = ({ guestName, onOpen, isLoading }) => {
               <div className="loader"></div>
             ) : (
               <>
-                <i className="fa-solid fa-envelope envelope-icon"></i>
+                <span className="envelope-wrapper" aria-hidden="true">
+                  <i className="fa-solid fa-envelope envelope-closed"></i>
+                  <i className="fa-solid fa-envelope-open envelope-open"></i>
+                </span>
                 Open Invitation
               </>
             )}
